@@ -1,7 +1,8 @@
 # assignment-03
 
 # no other imports needed
-from collections import defaultdict
+import collections
+
 import math
 
 ### PARENTHESES MATCHING
@@ -27,39 +28,19 @@ def reduce(f, id_, a):
 
 #### Iterative solution
 def parens_match_iterative(mylist):
-    """
-    Implement the iterative solution to the parens matching problem.
-    This function should call `iterate` using the `parens_update` function.
-    
-    Params:
-      mylist...a list of strings
-    Returns
-      True if the parenthesis are matched, False otherwise
-      
-    e.g.,
-    >>>parens_match_iterative(['(', 'a', ')'])
-    True
-    >>>parens_match_iterative(['('])
-    False
-    """
-    ### TODO
-    pass
+    def update_func(acc, char):
+      return parens_update(acc, char)
 
+    result = iterate(update_func, 0, mylist)
+
+    return result == 0
 
 def parens_update(current_output, next_input):
-    """
-    This function will be passed to the `iterate` function to 
-    solve the balanced parenthesis problem.
-    
-    Like all functions used by iterate, it takes in:
-    current_output....the cumulative output thus far (e.g., the running sum when doing addition)
-    next_input........the next value in the input
-    
-    Returns:
-      the updated value of `current_output`
-    """
-    ###TODO
-    pass
+    if next_input == '(':
+      return current_output + 1
+    elif next_input == ')':
+      return current_output - 1
+    return current_output
 
 
 def test_parens_match_iterative():
@@ -168,3 +149,10 @@ def test_parens_match_dc():
     assert parens_match_dc(['(', ')']) == True
     assert parens_match_dc(['(']) == False
     assert parens_match_dc([')']) == False
+
+
+test = parens_match_scan(['(', ')'])
+if test:
+  print("Yes")
+else:
+  print("no")
