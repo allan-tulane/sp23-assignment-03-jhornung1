@@ -92,34 +92,34 @@ def test_parens_match_scan():
 #### Divide and conquer solution
 
 def parens_match_dc(mylist):
-    """
-    Calls parens_match_dc_helper. If the result is (0,0),
-    that means there are no unmatched parentheses, so the input is valid.
-    
-    Returns:
-      True if parens_match_dc_helper returns (0,0); otherwise False
-    """
-    # done.
     n_unmatched_left, n_unmatched_right = parens_match_dc_helper(mylist)
     return n_unmatched_left==0 and n_unmatched_right==0
 
 def parens_match_dc_helper(mylist):
-    """
+  """
     Recursive, divide and conquer solution to the parens match problem.
     
-    Returns:
+  Returns:
       tuple (R, L), where R is the number of unmatched right parentheses, and
       L is the number of unmatched left parentheses. This output is used by 
       parens_match_dc to return the final True or False value
-    """
-    ###TODO
-    pass
+  """
+  left_stack = []
+  right_stack = []
+
+  for char in mylist:
+      if char == '(':
+          left_stack.append(char)
+      elif char == ')':
+          if left_stack:
+              left_stack.pop()
+          else:
+              right_stack.append(char)
+
+  return (len(right_stack), len(left_stack))
     
 
 def test_parens_match_dc():
     assert parens_match_dc(['(', ')']) == True
     assert parens_match_dc(['(']) == False
     assert parens_match_dc([')']) == False
-
-
-print(parens_match_scan(['(', ')', 'a', '(']))

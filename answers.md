@@ -19,3 +19,4 @@ If we look at the version of scan that was provided in class (it's in the notes)
 
 - **f.**
 
+The work recurrence relation is W(n) = W(n/2) + O(n) because the function divides into two parts recursively, and the work at each level is O(n). Therefore, the big O notation would be W(n) = O(n log n). Because each character in the input list is processed once and individually, the span recurrence formula is S(n) = S(n-1) + O(1) which in Big O is O(n).
