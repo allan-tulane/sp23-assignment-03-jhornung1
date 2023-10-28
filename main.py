@@ -52,24 +52,9 @@ def test_parens_match_iterative():
 #### Scan solution
 
 def parens_match_scan(mylist):
-    """
-    Implement a solution to the parens matching problem using `scan`.
-    This function should make one call each to `scan`, `map`, and `reduce`
-    
-    Params:
-      mylist...a list of strings
-    Returns
-      True if the parenthesis are matched, False otherwise
-      
-    e.g.,
-    >>>parens_match_scan(['(', 'a', ')'])
-    True
-    >>>parens_match_scan(['('])
-    False
-    
-    """
-    ###TODO
-    pass
+    paren_values = list(map(paren_map, mylist))
+    cumulative_sum, final_sum = scan(lambda x, y: x + y, 0, paren_values)
+    return final_sum == 0 and all(min_f(cumulative_sum[i], 0) >= 0 for i in range(len(mylist)))
 
 def scan(f, id_, a):
     """
@@ -84,20 +69,6 @@ def scan(f, id_, a):
            )
 
 def paren_map(x):
-    """
-    Returns 1 if input is '(', -1 if ')', 0 otherwise.
-    This will be used by your `parens_match_scan` function.
-    
-    Params:
-       x....an element of the input to the parens match problem (e.g., '(' or 'a')
-       
-    >>>paren_map('(')
-    1
-    >>>paren_map(')')
-    -1
-    >>>paren_map('a')
-    0
-    """
     if x == '(':
         return 1
     elif x == ')':
@@ -151,8 +122,4 @@ def test_parens_match_dc():
     assert parens_match_dc([')']) == False
 
 
-test = parens_match_scan(['(', ')'])
-if test:
-  print("Yes")
-else:
-  print("no")
+print(parens_match_scan(['(', ')', 'a', '(']))

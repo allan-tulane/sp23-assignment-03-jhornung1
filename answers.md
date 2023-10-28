@@ -14,8 +14,8 @@ Because the function is iteratie work and span recurrence relations are the same
 
 - **d.**
 
-
-
+If we look at the version of scan that was provided in class (it's in the notes), then we have a work recurrence relation of W(N) = W(n/2) + n, which (in big O notation) is O(n). Likewise, the recurrence relation for span is S(n) = S(n/2) + O(1) which is equal to O(log n)
 
 
 - **f.**
+
